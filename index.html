@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>COALHADOS PODCAST</title>
+  <title>Coalhados Podcast</title>
   <link rel="icon" type="image/png" href="logo-mascote.png" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&family=Roboto&display=swap" rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'KGWhYYouGoTtABeSoMeAn';
@@ -43,12 +42,13 @@
     }
 
     .main-episode {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: var(--secondary-color);
       padding: 3rem 1rem;
+      background: var(--secondary-color);
       text-align: center;
+    }
+
+    .main-episode h2 {
+      margin-bottom: 2rem;
     }
 
     .main-episode iframe {
@@ -82,10 +82,11 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.5s ease;
+      transition: all 0.6s ease;
+      font-family: 'Roboto', sans-serif;
     }
 
-    .news-card.show, .bio-card.show {
+    .show {
       opacity: 1;
       transform: translateY(0);
     }
@@ -99,14 +100,11 @@
     .news-card h3, .bio-card h3 {
       font-size: 1.2rem;
       margin: 1rem 0 0.5rem;
-      text-transform: none;
     }
 
     .news-card p, .bio-card p {
       font-size: 0.95rem;
-      font-family: 'Roboto', sans-serif;
       line-height: 1.4;
-      text-transform: none;
     }
 
     footer {
@@ -125,7 +123,11 @@
 
     @media (max-width: 768px) {
       .main-episode iframe {
-        height: 250px;
+        height: 240px;
+      }
+
+      .news-card, .bio-card {
+        max-width: 90%;
       }
     }
   </style>
@@ -137,21 +139,87 @@
   </header>
 
   <section class="main-episode">
-    <h2 class="section-title">Último Episódio - 03/04</h2>
+    <h2 class="section-title">ÚLTIMO EPISÓDIO - 03/04</h2>
     <iframe src="https://www.youtube.com/embed/KSn3lLGW39k?start=7177" allowfullscreen></iframe>
   </section>
 
   <section>
-    <h2 class="section-title">Notícias do Episódio</h2>
+    <h2 class="section-title">NOTÍCIAS DO EPISÓDIO</h2>
     <div class="news-container" id="news-container">
-      <!-- Conteúdo dinâmico das notícias -->
+      <!-- Notícias dinâmicas -->
     </div>
   </section>
 
   <section>
-    <h2 class="section-title">Conheça os Integrantes</h2>
+    <h2 class="section-title">CONHEÇA OS INTEGRANTES</h2>
     <div class="bios">
-      <div class="bio-card"><img src="IMG_20230316_133914_993.jpg" alt="Lucas Machado"><h3>Lucas Machado</h3><p>Âncora do programa e produtor. É o idealizador do Coalhados Podcast, cuida das redes sociais e conduz as conversas com leveza e curiosidade.</p></div>
-      <div class="bio-card"><img src="Imagem do WhatsApp de 2025-03-20 à(s) 13.47.16_28f3b86d.jpg" alt="Jackson Dallagnol"><h3>Jackson "Lego" Dallagnol</h3><p>Integrante da mesa. Grava vídeos hilários quando precisa. Suas piadas são sucesso garantido nos cortes, com milhões de visualizações.</p></div>
-      <div class="bio-card"><img src="293123163_4906341359477417_1040790068781521090_n.jpg" alt="Jeferson Ludwig"><h3>Jeferson "Caxa" Ludwig</h3><p>Integrante da mesa. Solta piadas memoráveis. Fica ainda mais popular interpretando o personagem Peda, um alemão de Arroio Canoas.</p></div>
-      <div class="bio-card"><img src="432314765_6724498657656294_7957373942560564705_n.jpg" alt="Juliano Biron"><h3>Juliano Biron</h3><p>Produtor e responsável pelas redes_
+      <div class="bio-card">
+        <img src="IMG_20230316_133914_993.jpg" alt="Lucas Machado">
+        <h3>Lucas Machado</h3>
+        <p>Âncora do programa e produtor. É o idealizador do Coalhados Podcast, cuida das redes sociais e conduz as conversas com leveza e curiosidade.</p>
+      </div>
+      <div class="bio-card">
+        <img src="Imagem do WhatsApp de 2025-03-20 à(s) 13.47.16_28f3b86d.jpg" alt="Jackson Dallagnol">
+        <h3>Jackson "Lego" Dallagnol</h3>
+        <p>Integrante da mesa. Grava vídeos hilários quando precisa. Suas piadas são sucesso garantido nos cortes, com milhões de visualizações.</p>
+      </div>
+      <div class="bio-card">
+        <img src="293123163_4906341359477417_1040790068781521090_n.jpg" alt="Jeferson Ludwig">
+        <h3>Jeferson "Caxa" Ludwig</h3>
+        <p>Integrante da mesa. Solta piadas memoráveis. Fica ainda mais popular interpretando o personagem Peda, um alemão de Arroio Canoas.</p>
+      </div>
+      <div class="bio-card">
+        <img src="432314765_6724498657656294_7957373942560564705_n.jpg" alt="Juliano Biron">
+        <h3>Juliano Biron</h3>
+        <p>Produtor e responsável pelas redes sociais quando necessário. É quem chama a atenção dos integrantes da mesa sobre a pauta e os patrocinadores.</p>
+      </div>
+      <div class="bio-card">
+        <img src="image.png" alt="Luan Kaafer">
+        <h3>Luan Kaafer</h3>
+        <p>O Jesus da Pomerânia. Cuida da produção, troca de cenas, anota os cortes e, quando dá, transforma água em vinho.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>SIGA O COALHADOS PODCAST:</p>
+    <div class="social-links">
+      <a href="https://instagram.com/coalhados" target="_blank">INSTAGRAM</a>
+      <a href="https://youtube.com/@coalhadospodcast" target="_blank">YOUTUBE</a>
+      <a href="mailto:coalhadospodcast@gmail.com">E-MAIL</a>
+    </div>
+  </footer>
+
+  <script>
+    function animateCards() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.news-card, .bio-card').forEach(card => observer.observe(card));
+    }
+
+    fetch('noticias.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('news-container');
+        container.innerHTML = data.map(noticia => `
+          <div class="news-card">
+            <img src="${noticia.imagem}" alt="${noticia.titulo}" />
+            <h3>${noticia.titulo}</h3>
+            <p>${noticia.descricao}</p>
+          </div>
+        `).join('');
+        animateCards();
+      })
+      .catch(error => {
+        document.getElementById('news-container').innerHTML = '<p>Erro ao carregar as notícias.</p>';
+        console.error('Erro ao carregar noticias.json:', error);
+      });
+
+    animateCards();
+  </script>
+</body>
+</html>
