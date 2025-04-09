@@ -42,41 +42,19 @@
       margin: 0 10px;
     }
 
-    .main-episode-wrapper {
+    .main-episode {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
+      flex-direction: column;
+      align-items: center;
       background: var(--secondary-color);
       padding: 3rem 1rem;
       text-align: center;
-    }
-
-    .main-episode {
-      flex: 1 1 600px;
-      max-width: 800px;
     }
 
     .main-episode iframe {
       width: 90%;
       max-width: 800px;
       height: 450px;
-      border-radius: 12px;
-      border: none;
-    }
-
-    .side-episodes {
-      flex: 1 1 300px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .side-episodes iframe {
-      width: 100%;
-      max-width: 300px;
-      height: 170px;
       border-radius: 12px;
       border: none;
     }
@@ -121,12 +99,14 @@
     .news-card h3, .bio-card h3 {
       font-size: 1.2rem;
       margin: 1rem 0 0.5rem;
+      text-transform: none;
     }
 
     .news-card p, .bio-card p {
       font-size: 0.95rem;
       font-family: 'Roboto', sans-serif;
       line-height: 1.4;
+      text-transform: none;
     }
 
     footer {
@@ -144,20 +124,8 @@
     }
 
     @media (max-width: 768px) {
-      .main-episode-wrapper {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .side-episodes {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .side-episodes iframe {
-        max-width: 45%;
-        height: 150px;
+      .main-episode iframe {
+        height: 250px;
       }
     }
   </style>
@@ -168,68 +136,22 @@
     <img src="logo-escrito.png" alt="Coalhados Podcast">
   </header>
 
-  <section class="main-episode-wrapper">
-    <div class="main-episode">
-      <h2 class="section-title">ÚLTIMO EPISÓDIO - 03/04</h2>
-      <iframe src="https://www.youtube.com/embed/KSn3lLGW39k?start=7177" allowfullscreen></iframe>
-    </div>
-    <div class="side-episodes">
-      <iframe src="https://youtu.be/xplfmCUsjek" allowfullscreen></iframe>
-      <iframe src="https://youtu.be/5JzEuKRiC1M" allowfullscreen></iframe>
-    </div>
+  <section class="main-episode">
+    <h2 class="section-title">Último Episódio - 03/04</h2>
+    <iframe src="https://www.youtube.com/embed/KSn3lLGW39k?start=7177" allowfullscreen></iframe>
   </section>
 
   <section>
-    <h2 class="section-title">NOTÍCIAS DO EPISÓDIO</h2>
+    <h2 class="section-title">Notícias do Episódio</h2>
     <div class="news-container" id="news-container">
-      <!-- Conteúdo dinâmico -->
+      <!-- Conteúdo dinâmico das notícias -->
     </div>
   </section>
 
   <section>
-    <h2 class="section-title">CONHEÇA OS INTEGRANTES</h2>
+    <h2 class="section-title">Conheça os Integrantes</h2>
     <div class="bios">
-      <div class="bio-card"><img src="IMG_20230316_133914_993.jpg" alt="Lucas Machado"><h3>LUCAS MACHADO</h3><p>ÂNCORA DO PROGRAMA E PRODUTOR. É O IDEALIZADOR DO COALHADOS PODCAST, CUIDA DAS REDES SOCIAIS E CONDUZ AS CONVERSAS COM LEVEZA E CURIOSIDADE.</p></div>
-      <div class="bio-card"><img src="Imagem do WhatsApp de 2025-03-20 à(s) 13.47.16_28f3b86d.jpg" alt="Jackson Dallagnol"><h3>JACKSON "LEGO" DALLAGNOL</h3><p>INTEGRANTE DA MESA. GRAVA VÍDEOS HILÁRIOS QUANDO PRECISA. SUAS PIADAS SÃO SUCESSO GARANTIDO NOS CORTES, COM MILHÕES DE VISUALIZAÇÕES.</p></div>
-      <div class="bio-card"><img src="293123163_4906341359477417_1040790068781521090_n.jpg" alt="Jeferson Ludwig"><h3>JEFERSON "CAXA" LUDWIG</h3><p>INTEGRANTE DA MESA. SOLTA PIADAS MEMORÁVEIS. FICA AINDA MAIS POPULAR INTERPRETANDO O PERSONAGEM PEDA, UM ALEMÃO DE ARROIO CANOAS.</p></div>
-      <div class="bio-card"><img src="432314765_6724498657656294_7957373942560564705_n.jpg" alt="Juliano Biron"><h3>JULIANO BIRON</h3><p>PRODUTOR E RESPONSÁVEL PELAS REDES SOCIAIS QUANDO NECESSÁRIO. É QUEM CHAMA A ATENÇÃO DOS INTEGRANTES DA MESA SOBRE A PAUTA E OS PATROCINADORES.</p></div>
-      <div class="bio-card"><img src="image.png" alt="Luan Kaafer"><h3>LUAN KAAFER</h3><p>O JESUS DA POMERÂNIA. CUIDA DA PRODUÇÃO, TROCA DE CENAS, ANOTA OS CORTES E, QUANDO DÁ, TRANSFORMA ÁGUA EM VINHO.</p></div>
-    </div>
-  </section>
-
-  <footer>
-    <p>SIGA O COALHADOS PODCAST:</p>
-    <div class="social-links">
-      <a href="https://instagram.com/coalhados" target="_blank">INSTAGRAM</a>
-      <a href="https://youtube.com/@coalhadospodcast" target="_blank">YOUTUBE</a>
-      <a href="mailto:coalhadospodcast@gmail.com">E-MAIL</a>
-    </div>
-  </footer>
-
-  <script>
-    fetch('noticias.json')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('news-container');
-        container.innerHTML = data.map(noticia => `
-          <div class="news-card">
-            <img src="${noticia.imagem}" alt="${noticia.titulo}" />
-            <h3>${noticia.titulo.toUpperCase()}</h3>
-            <p>${noticia.descricao}</p>
-          </div>
-        `).join('');
-        animateCards();
-      });
-
-    function animateCards() {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('show');
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.news-card, .bio-card').forEach(card => observer.observe(card));
-    }
-  </script>
-</body>
-</html>
+      <div class="bio-card"><img src="IMG_20230316_133914_993.jpg" alt="Lucas Machado"><h3>Lucas Machado</h3><p>Âncora do programa e produtor. É o idealizador do Coalhados Podcast, cuida das redes sociais e conduz as conversas com leveza e curiosidade.</p></div>
+      <div class="bio-card"><img src="Imagem do WhatsApp de 2025-03-20 à(s) 13.47.16_28f3b86d.jpg" alt="Jackson Dallagnol"><h3>Jackson "Lego" Dallagnol</h3><p>Integrante da mesa. Grava vídeos hilários quando precisa. Suas piadas são sucesso garantido nos cortes, com milhões de visualizações.</p></div>
+      <div class="bio-card"><img src="293123163_4906341359477417_1040790068781521090_n.jpg" alt="Jeferson Ludwig"><h3>Jeferson "Caxa" Ludwig</h3><p>Integrante da mesa. Solta piadas memoráveis. Fica ainda mais popular interpretando o personagem Peda, um alemão de Arroio Canoas.</p></div>
+      <div class="bio-card"><img src="432314765_6724498657656294_7957373942560564705_n.jpg" alt="Juliano Biron"><h3>Juliano Biron</h3><p>Produtor e responsável pelas redes_
