@@ -190,36 +190,42 @@
     </div>
   </footer>
 
-  <script>
-    function animateCards() {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('show');
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.news-card, .bio-card').forEach(card => observer.observe(card));
-    }
-
-    fetch('noticias.json')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('news-container');
-        container.innerHTML = data.map(noticia => `
-          <div class="news-card">
-            <img src="${noticia.imagem}" alt="${noticia.titulo}" />
-            <h3>${noticia.titulo}</h3>
-            <p>${noticia.descricao}</p>
-          </div>
-        `).join('');
-        animateCards();
-      })
-      .catch(error => {
-        document.getElementById('news-container').innerHTML = '<p>Erro ao carregar as notícias.</p>';
-        console.error('Erro ao carregar noticias.json:', error);
+<script>
+  function animateCards() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
       });
+    }, { threshold: 0.1 });
 
+    document.querySelectorAll('.news-card, .bio-card').forEach(card => observer.observe(card));
+  }
+
+  fetch('noticias.json')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('news-container');
+      container.innerHTML = data.map(noticia => `
+        <div class="news-card">
+          <img src="${noticia.imagem}" alt="${noticia.titulo}" />
+          <h3>${noticia.titulo}</h3>
+          <p>${noticia.descricao}</p>
+        </div>
+      `).join('');
+      
+      // Agora que os cards foram inseridos, aplicamos as animações
+      animateCards();
+    })
+    .catch(error => {
+      document.getElementById('news-container').innerHTML = '<p>Erro ao carregar as notícias.</p>';
+      console.error('Erro ao carregar noticias.json:', error);
+    });
+
+  // Animações para bios (já estão no HTML desde o início)
+  window.addEventListener('DOMContentLoaded', () => {
     animateCards();
-  </script>
+  });
+</script>
+  
 </body>
 </html>
