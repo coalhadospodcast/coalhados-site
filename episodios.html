@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episódios - Coalhados Podcast</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #111;
+      color: white;
+    }
+    .episodios-section {
+      padding: 2rem;
+    }
+    .episodios-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .episode-card {
+      text-decoration: none;
+      color: white;
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .episode-card:hover {
+      transform: scale(1.03);
+    }
+    .episode-card img {
+      width: 100%;
+      display: block;
+    }
+    .episode-card h3 {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section id="episodios" class="episodios-section">
+    <h2>Últimos Episódios</h2>
+    <div class="episodios-container" id="episodios-container">
+      <!-- Episódios serão carregados aqui -->
+    </div>
+  </section>
+
+  <script>
+    fetch('episodios/episodios.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('episodios-container');
+        data.forEach(episodio => {
+          const link = document.createElement('a');
+          link.href = `https://www.youtube.com/watch?v=${episodio.videoId}`;
+          link.target = "_blank";
+          link.className = "episode-card";
+          link.innerHTML = `
+            <img src="https://img.youtube.com/vi/${episodio.videoId}/hqdefault.jpg" alt="${episodio.titulo}">
+            <h3>${episodio.titulo}</h3>
+          `;
+          container.appendChild(link);
+        });
+      });
+  </script>
+</body>
+</html>
