@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coalhados Podcast</title>
   <link rel="icon" type="image/png" href="logo-mascote.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'KGWhYYouGoTtABeSoMeAn';
       src: url('KGWhYYouGoTtABeSoMeAn.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
 
     :root {
@@ -19,13 +22,9 @@
       --highlight: #F5F5F5;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      font-family: 'KGWhYYouGoTtABeSoMeAn', 'Rubik', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-color: var(--bg-color);
       color: var(--primary-color);
     }
@@ -41,14 +40,23 @@
       margin: 0 10px;
     }
 
+    nav {
+      background: var(--secondary-color);
+      padding: 0.5rem 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
     .main-episode {
       padding: 3rem 1rem;
       background: var(--secondary-color);
       text-align: center;
-    }
-
-    .main-episode h2 {
-      margin-bottom: 2rem;
     }
 
     .main-episode iframe {
@@ -80,15 +88,11 @@
       border-radius: 12px;
       max-width: 300px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-      font-family: 'Roboto', sans-serif;
+      transition: transform 0.3s;
     }
 
-    .show {
-      opacity: 1;
-      transform: translateY(0);
+    .news-card:hover, .bio-card:hover {
+      transform: translateY(-5px);
     }
 
     .news-card img, .bio-card img {
@@ -120,16 +124,6 @@
       text-decoration: none;
       font-weight: bold;
     }
-
-    @media (max-width: 768px) {
-      .main-episode iframe {
-        height: 240px;
-      }
-
-      .news-card, .bio-card {
-        max-width: 90%;
-      }
-    }
   </style>
 </head>
 <body>
@@ -138,19 +132,26 @@
     <img src="logo-escrito.png" alt="Coalhados Podcast">
   </header>
 
+  <nav>
+    <a href="index.html">INÍCIO</a>
+    <a href="episodios.html">EPISÓDIOS</a>
+    <a href="#noticias">NOTÍCIAS</a>
+    <a href="#integrantes">INTEGRANTES</a>
+  </nav>
+
   <section class="main-episode">
     <h2 class="section-title">ÚLTIMO EPISÓDIO - 03/04</h2>
     <iframe src="https://www.youtube.com/embed/KSn3lLGW39k?start=7177" allowfullscreen></iframe>
   </section>
 
-  <section>
+  <section id="noticias">
     <h2 class="section-title">NOTÍCIAS DO EPISÓDIO</h2>
     <div class="news-container" id="news-container">
-      <!-- Notícias dinâmicas -->
+      <!-- Conteúdo dinâmico -->
     </div>
   </section>
 
-  <section>
+  <section id="integrantes">
     <h2 class="section-title">CONHEÇA OS INTEGRANTES</h2>
     <div class="bios">
       <div class="bio-card">
@@ -190,42 +191,23 @@
     </div>
   </footer>
 
-<script>
-  function animateCards() {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('show');
+  <script>
+    fetch('noticias.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('news-container');
+        container.innerHTML = data.map(noticia => `
+          <div class="news-card">
+            <img src="${noticia.imagem}" alt="${noticia.titulo}" />
+            <h3>${noticia.titulo.toUpperCase()}</h3>
+            <p>${noticia.descricao}</p>
+          </div>
+        `).join('');
+      })
+      .catch(error => {
+        document.getElementById('news-container').innerHTML = '<p>Erro ao carregar as notícias.</p>';
+        console.error('Erro ao carregar noticias.json:', error);
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.news-card, .bio-card').forEach(card => observer.observe(card));
-  }
-
-  fetch('noticias.json')
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById('news-container');
-      container.innerHTML = data.map(noticia => `
-        <div class="news-card">
-          <img src="${noticia.imagem}" alt="${noticia.titulo}" />
-          <h3>${noticia.titulo}</h3>
-          <p>${noticia.descricao}</p>
-        </div>
-      `).join('');
-      
-      // Agora que os cards foram inseridos, aplicamos as animações
-      animateCards();
-    })
-    .catch(error => {
-      document.getElementById('news-container').innerHTML = '<p>Erro ao carregar as notícias.</p>';
-      console.error('Erro ao carregar noticias.json:', error);
-    });
-
-  // Animações para bios (já estão no HTML desde o início)
-  window.addEventListener('DOMContentLoaded', () => {
-    animateCards();
-  });
-</script>
-  
+  </script>
 </body>
 </html>
